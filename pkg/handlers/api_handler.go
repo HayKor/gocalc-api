@@ -6,8 +6,10 @@ import (
 	"github.com/HayKor/gocalc-api/pkg/errors"
 )
 
+// Custom wrap around http.HandlerFunc
 type APIFunc func(w http.ResponseWriter, r *http.Request) error
 
+// Make `http.HandlerFunc` out of `APIFunc`
 func Make(h APIFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if err := h(w, r); err != nil {
