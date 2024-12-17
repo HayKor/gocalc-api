@@ -4,33 +4,38 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"log/slog"
+
 	"github.com/HayKor/gocalc-api/pkg/calculator"
 	"github.com/HayKor/gocalc-api/pkg/errors"
+	"github.com/HayKor/gocalc-api/pkg/schemas"
 )
 
-type CalcRequest struct {
-	Expression string `json:"expression"`
-}
-
-type CalcResponse struct {
-	Result float64 `json:"result"`
-}
-
-func Calculate(w http.ResponseWriter, r *http.Request) error {
+func CalculateHandler(w http.ResponseWriter, r *http.Request) error {
 	var (
-		calcRequest CalcRequest
+		calcRequest schemas.CalcRequest
 	)
 
 	if err := json.NewDecoder(r.Body).Decode(&calcRequest); err != nil {
+		slog.Error(
+			"error while decoding request",
+			"error", err.Error(),
+		)
 		return errors.InternalServerError()
 	}
+	defer r.Body.Close()
 
 	result, err := calculator.Calc(calcRequest.Expression)
 	if err != nil {
+		slog.Error(
+			"error while calculating expression",
+			"expression", calcRequest.Expression,
+			"error", err.Error(),
+		)
 		return errors.InvalidInput()
 	}
 
-	calcResponse := CalcResponse{Result: result}
+	calcResponse := schemas.CalcResponse{Result: result}
 	writeJSON(w, http.StatusOK, calcResponse)
 
 	return nil
