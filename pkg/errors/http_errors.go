@@ -9,3 +9,7 @@ func InternalServerError() APIError {
 func InvalidInput() APIError {
 	return New(http.StatusUnprocessableEntity, "invalid input")
 }
+
+func MethodNotAllowed() APIError {
+	return New(http.StatusMethodNotAllowed, "such http method not allowed")
+}

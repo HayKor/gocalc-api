@@ -16,6 +16,10 @@ func CalculateHandler(w http.ResponseWriter, r *http.Request) error {
 		calcRequest schemas.CalcRequest
 	)
 
+	if r.Method != http.MethodPost {
+		return errors.MethodNotAllowed()
+	}
+
 	if err := json.NewDecoder(r.Body).Decode(&calcRequest); err != nil {
 		slog.Error(
 			"error while decoding request",
