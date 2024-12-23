@@ -1,6 +1,7 @@
 # gocalc-api
 
 **gocalc-api** is an API for calc service.
+The server runs on `port 8080`.
 
 ## installation
 
