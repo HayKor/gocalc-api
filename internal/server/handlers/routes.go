@@ -6,9 +6,9 @@ import (
 
 	"log/slog"
 
+	"github.com/HayKor/gocalc-api/internal/server/errors"
+	"github.com/HayKor/gocalc-api/internal/server/schemas"
 	"github.com/HayKor/gocalc-api/pkg/calculator"
-	"github.com/HayKor/gocalc-api/pkg/errors"
-	"github.com/HayKor/gocalc-api/pkg/schemas"
 )
 
 func CalculateHandler(w http.ResponseWriter, r *http.Request) error {

@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/HayKor/gocalc-api/pkg/errors"
+	"github.com/HayKor/gocalc-api/internal/server/errors"
 )
 
 // Custom wrap around http.HandlerFunc
