@@ -1,13 +1,10 @@
 package main
 
 import (
-	"net/http"
-
-	"github.com/HayKor/gocalc-api/pkg/handlers"
+	"github.com/HayKor/gocalc-api/pkg/server"
 )
 
 func main() {
-	mux := http.NewServeMux()
-	handlers.RegisterRoutes(mux)
-	http.ListenAndServe(":8080", mux)
+	app := server.NewApp()
+	app.Run()
 }
