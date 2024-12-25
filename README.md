@@ -6,7 +6,7 @@ The server runs on `port 8080`.
 ## installation
 
 ```shell
-git clone github.com/HayKor/gocalc-api
+git clone https://github.com/HayKor/gocalc-api.git
 ```
 
 ## Usage
